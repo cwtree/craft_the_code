@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true">
+
+	<property name="LOG_PATH" value="/data/log" />
+    <property name="LOG_LEVEL" value="info" />
+
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder charset="UTF-8">
+			<pattern>[%d{yyyy-MM-dd HH:mm:ss:SSS}][%-5p][%c][%t]%m%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="SYSTEM"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_PATH}/system.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_PATH}/system.log.%d{yyyyMMdd}
+			</fileNamePattern>
+		</rollingPolicy>
+		<encoder charset="UTF-8">
+			<pattern>[%d{yy-MM-dd HH:mm:ss:SSS}][%-5p][%c][%t]%m%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.chiwei" level="${LOG_LEVEL}"
+		additivity="false">
+		<appender-ref ref="SYSTEM" />
+	</logger>
+
+	<root level="${LOG_LEVEL}">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="SYSTEM" />
+	</root>
+
+</configuration>  
