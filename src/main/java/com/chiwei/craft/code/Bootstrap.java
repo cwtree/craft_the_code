@@ -2,6 +2,8 @@ package com.chiwei.craft.code;
 
 import com.chiwei.craft.code.observer.CarLicensePlateSubject;
 import com.chiwei.craft.code.observer.ObserverZhangsan;
+import com.chiwei.craft.code.observer.injava.DriverObserver;
+import com.chiwei.craft.code.observer.injava.TrafficSignalObservable;
 
 /**
  * 
@@ -19,9 +21,20 @@ public class Bootstrap {
 		subject.registerObserver(observer);
 		subject.notifyObservers();
 	}
-	
-	public static void main(String[] args) {
-		testObserver();
 
+	/**
+	 * JAVA内置观察者模式实现
+	 */
+	public static void testObserverInJava() {
+		TrafficSignalObservable subject = new TrafficSignalObservable();
+		DriverObserver observer = new DriverObserver();
+		subject.addObserver(observer);
+		subject.notifyObservers("红灯");
+		System.out.println("观察者主动拉取数据 " + subject.getCurrentSignal());
+	}
+
+	public static void main(String[] args) {
+		// testObserver();
+		testObserverInJava();
 	}
 }
