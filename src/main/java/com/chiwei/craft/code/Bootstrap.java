@@ -1,5 +1,9 @@
 package com.chiwei.craft.code;
 
+import com.chiwei.craft.code.decorator.CainiaoExpressDecorator;
+import com.chiwei.craft.code.decorator.Express;
+import com.chiwei.craft.code.decorator.JDExpressDecorator;
+import com.chiwei.craft.code.decorator.SFExpress;
 import com.chiwei.craft.code.observer.CarLicensePlateSubject;
 import com.chiwei.craft.code.observer.ObserverZhangsan;
 import com.chiwei.craft.code.observer.injava.DriverObserver;
@@ -33,8 +37,18 @@ public class Bootstrap {
 		System.out.println("观察者主动拉取数据 " + subject.getCurrentSignal());
 	}
 
+	/**
+	 * 装饰器模式
+	 */
+	public static void testDecorator() {
+		Express express = new JDExpressDecorator(new CainiaoExpressDecorator(new SFExpress()));
+		express.receive();
+		express.deliver();
+	}
+
 	public static void main(String[] args) {
 		// testObserver();
-		testObserverInJava();
+		// testObserverInJava();
+		testDecorator();
 	}
 }
