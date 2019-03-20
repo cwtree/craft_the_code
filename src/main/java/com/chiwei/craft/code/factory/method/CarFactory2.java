@@ -1,4 +1,6 @@
-package com.chiwei.craft.code.factory;
+package com.chiwei.craft.code.factory.method;
+
+import com.chiwei.craft.code.factory.Car;
 
 public abstract class CarFactory2 {
 

@@ -1,6 +1,8 @@
-package com.chiwei.craft.code.factory;
+package com.chiwei.craft.code.factory.method;
 
-public class HuachenCarFactory extends CarFactory2 {
+import com.chiwei.craft.code.factory.Car;
+
+public class ChinaHeZiCarFactory extends CarFactory2 {
 
 	@Override
 	public Car createCar(String type) {
@@ -9,7 +11,7 @@ public class HuachenCarFactory extends CarFactory2 {
 		if (type.equals("BMW")) {
 			c = new HuachenBMWCar();
 		} else if (type.equals("Nissan")) {
-			c = new HuachenNissanCar();
+			c = new DongfengNissanCar();
 		}
 		return c;
 	}

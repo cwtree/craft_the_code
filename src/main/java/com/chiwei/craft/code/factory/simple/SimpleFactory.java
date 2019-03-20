@@ -1,4 +1,8 @@
-package com.chiwei.craft.code.factory;
+package com.chiwei.craft.code.factory.simple;
+
+import com.chiwei.craft.code.factory.BMWCar;
+import com.chiwei.craft.code.factory.Car;
+import com.chiwei.craft.code.factory.NissanCar;
 
 public class SimpleFactory {
 
