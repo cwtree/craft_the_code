@@ -1,10 +1,12 @@
-package com.chiwei.craft.code.factory;
+package com.chiwei.craft.code.factory.method;
 
-public class HuachenNissanCar extends Car {
+import com.chiwei.craft.code.factory.Car;
 
-	public HuachenNissanCar() {
-		name = "HuaChen Nissan";
-		color = "white";
+public class DongfengNissanCar extends Car {
+
+	public DongfengNissanCar() {
+		name = "DongFeng Nissan";
+		color = "black";
 	}
 	
 	@Override

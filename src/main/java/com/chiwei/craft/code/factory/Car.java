@@ -2,9 +2,9 @@ package com.chiwei.craft.code.factory;
 
 public abstract class Car {
 	
-	String name;
+	public String name;
 	
-	String color;
+	public String color;
 
 	public abstract void drive();
 	
