@@ -1,5 +1,10 @@
 package com.chiwei.craft.code;
 
+import com.chiwei.craft.code.command.CreateFileCommand;
+import com.chiwei.craft.code.command.LenovoComputerInvoker;
+import com.chiwei.craft.code.command.LinuxReceiver;
+import com.chiwei.craft.code.command.ProcessorLookCommand;
+import com.chiwei.craft.code.command.WindowsReceiver;
 import com.chiwei.craft.code.decorator.CainiaoExpressDecorator;
 import com.chiwei.craft.code.decorator.Express;
 import com.chiwei.craft.code.decorator.JDExpressDecorator;
@@ -53,7 +58,7 @@ public class Bootstrap {
 		express.receive();
 		express.deliver();
 	}
-	
+
 	/**
 	 * 简单工厂模式
 	 */
@@ -62,7 +67,7 @@ public class Bootstrap {
 		CarFactory factory = new CarFactory(new SimpleFactory());
 		factory.testCar("Nissan");
 	}
-	
+
 	/**
 	 * 工厂方法模式
 	 */
@@ -72,7 +77,7 @@ public class Bootstrap {
 		factory.testCar("BMW");
 		factory.testCar("Nissan");
 	}
-	
+
 	/**
 	 * 抽象工厂
 	 */
@@ -82,12 +87,31 @@ public class Bootstrap {
 		factory.testCar("Benz");
 	}
 
+	/**
+	 * 命令模式 这里就是命令模式的client客户端 创建具体的命令对象，并设置命令对象的接收者
+	 */
+	public static void testCmd() {
+		// 创建invoker，命令执行对象
+		LenovoComputerInvoker lenovo = new LenovoComputerInvoker();
+		// 创建命令接收者
+		WindowsReceiver windows = new WindowsReceiver();
+		LinuxReceiver linux = new LinuxReceiver();
+		// 创建命令
+		CreateFileCommand createFile = new CreateFileCommand(windows);
+		ProcessorLookCommand ps = new ProcessorLookCommand(linux);
+		lenovo.setCmd(createFile);
+		lenovo.exeCmd();
+		lenovo.setCmd(ps);
+		lenovo.exeCmd();
+	}
+
 	public static void main(String[] args) {
 		// testObserver();
 		// testObserverInJava();
-		//testDecorator();
-		simpleFactoryMethod();
-		factoryMethod();
-		abstractFactory();
+		// testDecorator();
+		// simpleFactoryMethod();
+		// factoryMethod();
+		// abstractFactory();
+		testCmd();
 	}
 }
