@@ -1,5 +1,9 @@
 package com.chiwei.craft.code;
 
+import com.chiwei.craft.code.adapter.clazz.AndroidCharge;
+import com.chiwei.craft.code.adapter.clazz.Huawei2AndroidChargeAdapter;
+import com.chiwei.craft.code.adapter.clazz.Mate10ProHuaweiCharge;
+import com.chiwei.craft.code.adapter.object.Huawei2AndroidChargeObjectAdapter;
 import com.chiwei.craft.code.command.CreateFileCommand;
 import com.chiwei.craft.code.command.LenovoComputerInvoker;
 import com.chiwei.craft.code.command.LinuxReceiver;
@@ -9,6 +13,11 @@ import com.chiwei.craft.code.decorator.CainiaoExpressDecorator;
 import com.chiwei.craft.code.decorator.Express;
 import com.chiwei.craft.code.decorator.JDExpressDecorator;
 import com.chiwei.craft.code.decorator.SFExpress;
+import com.chiwei.craft.code.facade.CarDoor;
+import com.chiwei.craft.code.facade.CarKey;
+import com.chiwei.craft.code.facade.DriveCarFacade;
+import com.chiwei.craft.code.facade.Engine;
+import com.chiwei.craft.code.facade.SafetyBelt;
 import com.chiwei.craft.code.factory.abstraction.AmericanCarFactory;
 import com.chiwei.craft.code.factory.method.CarFactory2;
 import com.chiwei.craft.code.factory.method.ChinaHeZiCarFactory;
@@ -105,6 +114,30 @@ public class Bootstrap {
 		lenovo.exeCmd();
 	}
 
+	/**
+	 * 类适配器模式，继承实现
+	 */
+	public static void testClassAdapter() {
+		AndroidCharge android = new Huawei2AndroidChargeAdapter();
+		android.androidCharge();
+	}
+
+	/**
+	 * 对象适配器模式，组合实现
+	 */
+	public static void testObjectAdapter() {
+		AndroidCharge android = new Huawei2AndroidChargeObjectAdapter(new Mate10ProHuaweiCharge());
+		android.androidCharge();
+	}
+
+	/**
+	 * 外观模式，门面模式
+	 */
+	public static void testFacade() {
+		DriveCarFacade car = new DriveCarFacade(new CarKey(), new CarDoor(), new SafetyBelt(), new Engine());
+		car.driveCar();
+	}
+
 	public static void main(String[] args) {
 		// testObserver();
 		// testObserverInJava();
@@ -112,6 +145,9 @@ public class Bootstrap {
 		// simpleFactoryMethod();
 		// factoryMethod();
 		// abstractFactory();
-		testCmd();
+		// testCmd();
+		// testClassAdapter();
+		// testObjectAdapter();
+		testFacade();
 	}
 }
