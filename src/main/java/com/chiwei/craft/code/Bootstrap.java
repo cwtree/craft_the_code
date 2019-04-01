@@ -27,6 +27,8 @@ import com.chiwei.craft.code.observer.CarLicensePlateSubject;
 import com.chiwei.craft.code.observer.ObserverZhangsan;
 import com.chiwei.craft.code.observer.injava.DriverObserver;
 import com.chiwei.craft.code.observer.injava.TrafficSignalObservable;
+import com.chiwei.craft.code.template.TemplateClass;
+import com.chiwei.craft.code.template.TemplateClassObject;
 
 /**
  * 
@@ -138,6 +140,17 @@ public class Bootstrap {
 		car.driveCar();
 	}
 
+	/**
+	 * 模板方法模式
+	 */
+	public static void testTemplate() {
+		TemplateClass tco = new TemplateClassObject();
+		tco.method1();
+		tco.method2();
+		System.out.println("======");
+		tco.templateMethod();
+	}
+
 	public static void main(String[] args) {
 		// testObserver();
 		// testObserverInJava();
@@ -148,6 +161,7 @@ public class Bootstrap {
 		// testCmd();
 		// testClassAdapter();
 		// testObjectAdapter();
-		testFacade();
+		// testFacade();
+		testTemplate();
 	}
 }
