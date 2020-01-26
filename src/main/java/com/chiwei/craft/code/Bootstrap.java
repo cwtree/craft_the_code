@@ -27,6 +27,8 @@ import com.chiwei.craft.code.observer.CarLicensePlateSubject;
 import com.chiwei.craft.code.observer.ObserverZhangsan;
 import com.chiwei.craft.code.observer.injava.DriverObserver;
 import com.chiwei.craft.code.observer.injava.TrafficSignalObservable;
+import com.chiwei.craft.code.strategy.Context;
+import com.chiwei.craft.code.strategy.FlyTravelStrategy;
 import com.chiwei.craft.code.template.TemplateClass;
 import com.chiwei.craft.code.template.TemplateClassObject;
 
@@ -150,6 +152,14 @@ public class Bootstrap {
 		System.out.println("======");
 		tco.templateMethod();
 	}
+	
+	/**
+	 * 策略模式
+	 */
+	public static void strategy() {
+		Context c = new Context(new FlyTravelStrategy());
+		c.executeTravel();
+	}
 
 	public static void main(String[] args) {
 		// testObserver();
@@ -162,6 +172,7 @@ public class Bootstrap {
 		// testClassAdapter();
 		// testObjectAdapter();
 		// testFacade();
-		testTemplate();
+		// testTemplate();
+		strategy();
 	}
 }
