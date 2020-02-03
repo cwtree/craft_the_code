@@ -27,10 +27,16 @@ import com.chiwei.craft.code.observer.CarLicensePlateSubject;
 import com.chiwei.craft.code.observer.ObserverZhangsan;
 import com.chiwei.craft.code.observer.injava.DriverObserver;
 import com.chiwei.craft.code.observer.injava.TrafficSignalObservable;
+import com.chiwei.craft.code.proxy.MyService;
+import com.chiwei.craft.code.proxy.MyServiceImpl;
+import com.chiwei.craft.code.proxy.cglib.CglibInterceptor;
+import com.chiwei.craft.code.proxy.jdk.dynamic.JdkHandler;
 import com.chiwei.craft.code.strategy.Context;
 import com.chiwei.craft.code.strategy.FlyTravelStrategy;
 import com.chiwei.craft.code.template.TemplateClass;
 import com.chiwei.craft.code.template.TemplateClassObject;
+
+import net.sf.cglib.proxy.Enhancer;
 
 /**
  * 
@@ -160,6 +166,26 @@ public class Bootstrap {
 		Context c = new Context(new FlyTravelStrategy());
 		c.executeTravel();
 	}
+	
+	/**
+	 * JDK动态代理
+	 */
+	public static void jdkDynamicProxy() {
+		JdkHandler jh = new JdkHandler(new MyServiceImpl());
+		MyService ms = jh.getProxy();
+		ms.say("jdk 动态代理");
+	}
+	
+	/**
+	 * cglib 动态代理
+	 */
+	public static void cglibProxy() {
+		Enhancer en = new Enhancer();
+		en.setSuperclass(MyServiceImpl.class);
+		en.setCallback(new CglibInterceptor());
+		MyService ms = (MyService) en.create();
+		ms.say("cglib 动态代理");
+	}
 
 	public static void main(String[] args) {
 		// testObserver();
@@ -173,6 +199,8 @@ public class Bootstrap {
 		// testObjectAdapter();
 		// testFacade();
 		// testTemplate();
-		strategy();
+		// strategy();
+		// jdkDynamicProxy();
+		cglibProxy();
 	}
 }
