@@ -200,7 +200,7 @@ public class Bootstrap {
 		// testFacade();
 		// testTemplate();
 		// strategy();
-		// jdkDynamicProxy();
-		cglibProxy();
+		jdkDynamicProxy();
+		//cglibProxy();
 	}
 }

@@ -1,4 +1,4 @@
-package com.chiwei.craft.code.ratelimiter;
+package com.chiwei.craft.code.guava.ratelimiter;
 
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
