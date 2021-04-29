@@ -1,2 +1,2 @@
-mvn eclipse:eclipse -DdownloadSources -DdownloadJavadocs 
+mvn eclipse:eclipse -DdownloadSources
 @pause

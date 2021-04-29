@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration scan="true">
 
-	<property name="LOG_PATH" value="/data/log" />
+	<property name="LOG_PATH" value="./logs" />
     <property name="LOG_LEVEL" value="info" />
 
 	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
