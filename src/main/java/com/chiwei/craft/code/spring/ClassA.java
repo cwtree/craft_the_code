@@ -12,9 +12,9 @@ public class ClassA {
 
 	@Resource
 	private ClassB b;
-	
+
 	public ClassA() {
 		log.info("ClassA Constructed ...");
 	}
-	
+
 }

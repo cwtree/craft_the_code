@@ -3,9 +3,9 @@ package com.chiwei.craft.code.observer;
 import java.util.ArrayList;
 
 public class CarLicensePlateSubject implements Subject {
-	
+
 	private ArrayList<Observer> list;
-	
+
 	public CarLicensePlateSubject() {
 		// TODO Auto-generated constructor stub
 		list = new ArrayList<Observer>();
@@ -26,7 +26,7 @@ public class CarLicensePlateSubject implements Subject {
 	@Override
 	public void notifyObservers() {
 		// TODO Auto-generated method stub
-		for(Observer o:list) {
+		for (Observer o : list) {
 			o.update("摇到车牌了");
 		}
 	}

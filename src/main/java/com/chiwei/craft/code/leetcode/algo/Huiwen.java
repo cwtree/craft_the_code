@@ -10,20 +10,24 @@ package com.chiwei.craft.code.leetcode.algo;
 public class Huiwen {
 
 	public static boolean isPalindrome(int x) {
-		// /10 %10
-		StringBuilder s = new StringBuilder(x + "");
-		return s.reverse().toString().equals(x+"");
+		StringBuffer sb = new StringBuffer(x + "");
+		return sb.reverse().toString().equals(sb + "");
+		// StringBuilder s = new StringBuilder(x + "");
+		// return s.reverse().toString().equals(x+"");
 	}
-	
+
 	public static boolean isPalindrome2(int x) {
-		// /10 %10
+		// 121
+		// sum=1,temp=12
+		// sum=10+2=12,temp=1
+		// sum=120+1,temp=0
 		int temp = x;
 		int sum = 0;
-		while(temp>0) {
-			sum=sum*10+temp%10;
-			temp=temp/10;
+		while (temp > 0) {
+			sum = sum * 10 + temp % 10;
+			temp = temp / 10;
 		}
-		return sum==x;
+		return sum == x;
 	}
 
 	public static void main(String[] args) {

@@ -19,7 +19,7 @@ public class JOLTest {
 		System.out.println(GraphLayout.parseInstance(user1).toPrintable());
 		System.out.println("====对象大小信息====");
 		System.out.println(GraphLayout.parseInstance(user1).totalSize());
-		
+
 	}
 
 }

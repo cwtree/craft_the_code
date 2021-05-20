@@ -6,6 +6,7 @@ public class DriveCarFacade {
 	private CarDoor door;
 	private SafetyBelt belt;
 	private Engine engine;
+
 	public DriveCarFacade(CarKey key, CarDoor door, SafetyBelt belt, Engine engine) {
 		super();
 		this.key = key;
@@ -13,7 +14,7 @@ public class DriveCarFacade {
 		this.belt = belt;
 		this.engine = engine;
 	}
-	
+
 	public void driveCar() {
 		key.unlock();
 		door.openDoor();
@@ -21,5 +22,5 @@ public class DriveCarFacade {
 		engine.start();
 		System.out.println("车子开动了...");
 	}
-	
+
 }

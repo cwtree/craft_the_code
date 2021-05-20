@@ -8,7 +8,7 @@ public class DongfengNissanCar extends Car {
 		name = "DongFeng Nissan";
 		color = "black";
 	}
-	
+
 	@Override
 	public void drive() {
 		// TODO Auto-generated method stub

@@ -25,7 +25,7 @@ class Director extends Thread {
 		this.latch = latch;
 		this.name = name;
 	}
-	
+
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub

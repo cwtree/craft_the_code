@@ -7,8 +7,8 @@ import com.chiwei.craft.code.factory.NissanCar;
 public class SimpleFactory {
 
 	/**
-	 * 简单工厂模式，单纯的将创建对象的方法移至工厂类中
-	 * 返回用户真正想要的对象
+	 * 简单工厂模式，单纯的将创建对象的方法移至工厂类中 返回用户真正想要的对象
+	 * 
 	 * @param type
 	 * @return
 	 */
@@ -21,5 +21,5 @@ public class SimpleFactory {
 		}
 		return c;
 	}
-	
+
 }

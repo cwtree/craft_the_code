@@ -10,7 +10,7 @@ public class BloomFilterTest {
 		// TODO Auto-generated method stub
 		int total = 1000000;// 集合大小
 		double fpp = 0.00001;
-		BloomFilter<String> bf = BloomFilter.create(Funnels.stringFunnel(Charsets.UTF_8), total,fpp);
+		BloomFilter<String> bf = BloomFilter.create(Funnels.stringFunnel(Charsets.UTF_8), total, fpp);
 		for (int i = 0; i < total; i++) {
 			bf.put("" + i);
 		}

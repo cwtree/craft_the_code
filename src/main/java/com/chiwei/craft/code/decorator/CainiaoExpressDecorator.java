@@ -21,6 +21,4 @@ public class CainiaoExpressDecorator extends ExpressDecrator {
 		System.out.println("送件信息同步到菜鸟");
 	}
 
-	
-	
 }

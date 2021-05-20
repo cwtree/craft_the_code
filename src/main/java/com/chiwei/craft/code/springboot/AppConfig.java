@@ -20,9 +20,7 @@ public class AppConfig implements WebMvcConfigurer {
 		// TODO Auto-generated method stub
 		FastJsonHttpMessageConverter fjhm = new FastJsonHttpMessageConverter();
 		converters.add(fjhm);
-		//WebMvcConfigurer.super.configureMessageConverters(converters);
+		// WebMvcConfigurer.super.configureMessageConverters(converters);
 	}
 
-	
-	
 }

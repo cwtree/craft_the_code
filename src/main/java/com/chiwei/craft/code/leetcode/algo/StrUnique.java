@@ -7,6 +7,7 @@ public class StrUnique {
 
 	/**
 	 * 判断字符串里的字符是否都是唯一的
+	 * 
 	 * @Description: TODO(这里用一句话描述这个方法的作用)
 	 * @param str
 	 * @return

@@ -16,17 +16,16 @@ public class Demo1Client {
 		// TODO Auto-generated method stub
 		EventLoopGroup group = new NioEventLoopGroup();
 		Bootstrap b = new Bootstrap();
-		b.group(group).channel(NioSocketChannel.class)
-		.option(ChannelOption.TCP_NODELAY, true)
-		.handler(new ChannelInitializer<SocketChannel>() {
+		b.group(group).channel(NioSocketChannel.class).option(ChannelOption.TCP_NODELAY, true)
+				.handler(new ChannelInitializer<SocketChannel>() {
 
-			@Override
-			protected void initChannel(SocketChannel ch) throws Exception {
-				// TODO Auto-generated method stub
-				ChannelPipeline p = ch.pipeline();
-				p.addLast(new LoggingHandler());
-			}
-		});
+					@Override
+					protected void initChannel(SocketChannel ch) throws Exception {
+						// TODO Auto-generated method stub
+						ChannelPipeline p = ch.pipeline();
+						p.addLast(new LoggingHandler());
+					}
+				});
 		b.connect("127.0.0.1", 9999);
 	}
 

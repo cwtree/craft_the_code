@@ -12,8 +12,8 @@ public class DelaySyncSingleton {
 	}
 
 	/**
-	 * 延迟同步，只有第一次调用实例化的时候会同步阻塞
-	 * 双重检测
+	 * 延迟同步，只有第一次调用实例化的时候会同步阻塞 双重检测
+	 * 
 	 * @return
 	 */
 	public static DelaySyncSingleton getInstance() {

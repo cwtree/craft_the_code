@@ -15,7 +15,7 @@ public class NoRepeatLongestStr {
 	public static int lengthOfLongestSubstring(String s) {
 		int size, i = 0, j = 0, k = 0, max = 0;
 		size = s.length();
-		//第一层循环，从0开始
+		// 第一层循环，从0开始
 		for (j = 0; j < size; j++) {
 			for (k = i; k < j; k++) {
 				if (s.charAt(k) == s.charAt(j)) {
@@ -28,23 +28,23 @@ public class NoRepeatLongestStr {
 		}
 		return max;
 	}
-	
+
 	public static int lengthOfLongestSubstring2(String s) {
 		String str = "";
 		int len = 0;
-		for(int i=0;i<s.length();i++) {
-			String temp = s.charAt(i)+"";
+		for (int i = 0; i < s.length(); i++) {
+			String temp = s.charAt(i) + "";
 			int index = str.indexOf(temp);
-			if(index<=-1) {
-				str+=temp;
-				len = len<str.length()?str.length():len;
-			}else {
-				//存在重复
-				str = str.substring(index+1)+temp;
+			if (index <= -1) {
+				str += temp;
+				len = len < str.length() ? str.length() : len;
+			} else {
+				// 存在重复
+				str = str.substring(index + 1) + temp;
 				len = str.length();
 			}
 		}
-		System.out.println("---"+str);
+		System.out.println("---" + str);
 		return len;
 	}
 

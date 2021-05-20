@@ -14,8 +14,8 @@ public class TimeTest {
 		System.out.println(now2);
 		LocalTime now3 = LocalTime.now();
 		System.out.println(now3);
-		int h=1;
-		System.out.println(h>>>16);
+		int h = 1;
+		System.out.println(h >>> 16);
 	}
 
 }

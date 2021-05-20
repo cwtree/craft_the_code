@@ -158,7 +158,7 @@ public class Bootstrap {
 		System.out.println("======");
 		tco.templateMethod();
 	}
-	
+
 	/**
 	 * 策略模式
 	 */
@@ -166,7 +166,7 @@ public class Bootstrap {
 		Context c = new Context(new FlyTravelStrategy());
 		c.executeTravel();
 	}
-	
+
 	/**
 	 * JDK动态代理
 	 */
@@ -175,7 +175,7 @@ public class Bootstrap {
 		MyService ms = jh.getProxy();
 		ms.say("jdk 动态代理");
 	}
-	
+
 	/**
 	 * cglib 动态代理
 	 */
@@ -201,6 +201,6 @@ public class Bootstrap {
 		// testTemplate();
 		// strategy();
 		jdkDynamicProxy();
-		//cglibProxy();
+		// cglibProxy();
 	}
 }

@@ -10,13 +10,13 @@ public abstract class CarFactory2 {
 		c.brake();
 		return c;
 	}
-	
+
 	/**
 	 * 将对象实例化交给子类实现
+	 * 
 	 * @param type
-	 * @return
-	 * abstract Product factoryMethod(String type)
+	 * @return abstract Product factoryMethod(String type)
 	 */
 	public abstract Car createCar(String type);
-	
+
 }

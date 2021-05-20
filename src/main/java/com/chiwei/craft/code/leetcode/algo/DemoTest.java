@@ -133,43 +133,43 @@ public class DemoTest {
 		List<Integer> list = new ArrayList<>();
 		while (pre != null) {
 			if (!list.contains(pre.val)) {
-				//不包含这个数字
+				// 不包含这个数字
 				list.add(pre.val);
-				//later指针记录当前节点
+				// later指针记录当前节点
 				later = pre;
-				//指针后移
+				// 指针后移
 				pre = pre.next;
 			} else {
-				//数字重复，指针直接后移
+				// 数字重复，指针直接后移
 				pre = pre.next;
-				//later指向后移后的指针
+				// later指向后移后的指针
 				later.next = pre;
 			}
 		}
 		return head;
 	}
-	
+
 	/**
-	 * 返回链表倒数第K个节点
-	 * 双向指针  p q 距离K且p.next为空，q即为结果
+	 * 返回链表倒数第K个节点 双向指针 p q 距离K且p.next为空，q即为结果
+	 * 
 	 * @Description: TODO(这里用一句话描述这个方法的作用)
 	 * @param head
 	 * @param k
 	 * @return
 	 */
 	public static int kthToLast(ListNode head, int k) {
-		if(head==null)
+		if (head == null)
 			return -1;
 		ListNode p = head;
-		for(int i=0;i<k;i++) {
+		for (int i = 0; i < k; i++) {
 			p = p.next;
 		}
-		while(p!=null) {
+		while (p != null) {
 			head = head.next;
 			p = p.next;
 		}
 		return head.val;
-    }
+	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -201,24 +201,15 @@ public class DemoTest {
 		 * String s1 = "waterbottle"; String s2 = "erbottlewat";
 		 * System.out.println(isFlipedString(s1, s2));
 		 */
-		/*ListNode ln1 = new ListNode(1);
-		ListNode ln2 = new ListNode(1);
-		ListNode ln3 = new ListNode(2);
-		ListNode ln31 = new ListNode(1);
-		ListNode ln32 = new ListNode(3);
-		ListNode ln33 = new ListNode(0);
-		// 391
-		ln1.next = ln2;
-		ln2.next = ln3;
-		ln3.next = ln31;
-		ln31.next = ln32;
-		ln32.next = ln33;
-		ListNode node = removeDuplicateNodes(ln1);
-		while (node != null) {
-			System.out.println(node.val);
-			node = node.next;
-		}*/
-		
+		/*
+		 * ListNode ln1 = new ListNode(1); ListNode ln2 = new ListNode(1); ListNode ln3
+		 * = new ListNode(2); ListNode ln31 = new ListNode(1); ListNode ln32 = new
+		 * ListNode(3); ListNode ln33 = new ListNode(0); // 391 ln1.next = ln2; ln2.next
+		 * = ln3; ln3.next = ln31; ln31.next = ln32; ln32.next = ln33; ListNode node =
+		 * removeDuplicateNodes(ln1); while (node != null) {
+		 * System.out.println(node.val); node = node.next; }
+		 */
+
 		ListNode ln1 = new ListNode(1);
 		ListNode ln2 = new ListNode(1);
 		ListNode ln3 = new ListNode(2);
@@ -231,11 +222,9 @@ public class DemoTest {
 		ln3.next = ln31;
 		ln31.next = ln32;
 		ln32.next = ln33;
-		int a = kthToLast(ln1,6);
+		int a = kthToLast(ln1, 6);
 		System.out.println(a);
-		
-		
-		
+
 	}
 
 }

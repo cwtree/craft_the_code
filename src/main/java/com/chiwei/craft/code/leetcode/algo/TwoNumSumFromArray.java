@@ -33,8 +33,8 @@ public class TwoNumSumFromArray {
 	}
 
 	/**
-	 * 通过map记录每个target-a[i]的下标
-	 * 当map中有a[i]了，直接返回i和差的下标
+	 * 通过map记录每个target-a[i]的下标 当map中有a[i]了，直接返回i和差的下标
+	 * 
 	 * @param a
 	 * @param target
 	 * @return
@@ -46,6 +46,7 @@ public class TwoNumSumFromArray {
 			if (map.containsKey(a[i])) {
 				result[0] = i;
 				result[1] = map.get(a[i]);
+				break;
 			} else {
 				map.put(target - a[i], i);
 			}

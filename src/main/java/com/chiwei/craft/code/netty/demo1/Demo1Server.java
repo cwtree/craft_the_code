@@ -20,34 +20,32 @@ public class Demo1Server {
 		EventLoopGroup bossGroup = new NioEventLoopGroup();
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
 		ServerBootstrap b = new ServerBootstrap();
-		b.group(bossGroup,workerGroup).channel(NioServerSocketChannel.class)
-		.option(ChannelOption.SO_BACKLOG	, 100)
-		.handler(new LoggingHandler(LogLevel.INFO))
-		.childHandler(new ChannelInitializer<SocketChannel>() {
+		b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class).option(ChannelOption.SO_BACKLOG, 100)
+				.handler(new LoggingHandler(LogLevel.INFO)).childHandler(new ChannelInitializer<SocketChannel>() {
 
-			@Override
-			protected void initChannel(SocketChannel ch) throws Exception {
-				// TODO Auto-generated method stub
-				ChannelPipeline p = ch.pipeline();
-				p.addLast(new LoggingHandler(LogLevel.INFO));
-			}
-			
-		});
+					@Override
+					protected void initChannel(SocketChannel ch) throws Exception {
+						// TODO Auto-generated method stub
+						ChannelPipeline p = ch.pipeline();
+						p.addLast(new LoggingHandler(LogLevel.INFO));
+					}
+
+				});
 		try {
 			ChannelFuture f = b.bind(9999).sync();
 			f.channel().closeFuture().addListener(new ChannelFutureListener() {
-				
+
 				@Override
 				public void operationComplete(ChannelFuture future) throws Exception {
 					// TODO Auto-generated method stub
 					System.out.println("==================");
-					System.out.println("---"+future.channel().toString());
+					System.out.println("---" + future.channel().toString());
 				}
 			});
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
+		} finally {
 			bossGroup.shutdownGracefully();
 			workerGroup.shutdownGracefully();
 		}

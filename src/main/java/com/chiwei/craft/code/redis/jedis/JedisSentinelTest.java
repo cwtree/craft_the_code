@@ -35,7 +35,7 @@ public class JedisSentinelTest {
 		JedisSentinelPool pool = new JedisSentinelPool(masterName, sentinels, config, 5000, "cmcc2019");
 		Jedis jedis = pool.getResource();
 		jedis.setex("a", 10, "b");
-		System.out.println("---"+jedis.get("a"));
+		System.out.println("---" + jedis.get("a"));
 		jedis.close();
 	}
 

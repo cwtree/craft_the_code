@@ -34,7 +34,7 @@ public class RateLimiterTest {
 		long begin = System.currentTimeMillis();
 		for (int i = 0; i < 10; i++) {
 			try {
-				//Thread.sleep(500L);
+				// Thread.sleep(500L);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

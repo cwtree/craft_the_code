@@ -19,7 +19,7 @@ public class LinkNumSum {
 	public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 		ListNode root = new ListNode(0);
 		ListNode cursor = root;
-		int carry = 0;//用来处理两个位置数字和大于10的情况
+		int carry = 0;// 用来处理两个位置数字和大于10的情况
 		while (l1 != null || l2 != null || carry != 0) {
 			int l1Val = l1 != null ? l1.val : 0;
 			int l2Val = l2 != null ? l2.val : 0;
@@ -36,27 +36,49 @@ public class LinkNumSum {
 			if (l2 != null)
 				l2 = l2.next;
 		}
-		//root是0，去掉
+		// root是0，去掉
 		return root.next;
+	}
+
+	public static ListNode addTwoList(ListNode l1, ListNode l2) {
+		ListNode root = new ListNode(0);
+		ListNode cur = root;
+		int temp = 0;
+		while (l1 != null || l2 != null || temp != 0) {
+			int value1 = l1 != null ? l1.val : 0;
+			int value2 = l2 != null ? l2.val : 0;
+			int sum = value1 + value2 + temp;// 超过10的只取个位数保留，高位往后进
+			temp = sum / 10;// 高位进位，加上去
+			ListNode sumNode = new ListNode(sum % 10);// 余数留下
+			cur.next = sumNode;
+			cur = sumNode;
+			if (l1 != null) {
+				l1 = l1.next;
+			}
+			if (l2 != null) {
+				l2 = l2.next;
+			}
+		}
+		return root.next;// 返回链表
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		ListNode ln1 = new ListNode(8);
-		ListNode ln2 = new ListNode(1);
-		ListNode ln3 = new ListNode(2);
-		ListNode ln31 = new ListNode(0);
-		ListNode ln32 = new ListNode(0);
-		ListNode ln33 = new ListNode(1);
+		ListNode ln1 = new ListNode(2);
+		ListNode ln2 = new ListNode(4);
+		ListNode ln3 = new ListNode(3);
+		ListNode ln31 = new ListNode(9);
+		ListNode ln32 = new ListNode(8);
+		ListNode ln33 = new ListNode(7);
 		// 391
 		ln1.next = ln2;
 		ln2.next = ln3;
-		ln3.next = ln31;
-		//ln31.next = ln32;
-		//ln32.next = ln33;
-		ListNode ln4 = new ListNode(2);
-		ListNode ln5 = new ListNode(9);
-		ListNode ln6 = new ListNode(8);
+		ln3.next = null;// ln31;
+		// ln31.next = ln32;
+		// ln32.next = ln33;
+		ListNode ln4 = new ListNode(5);
+		ListNode ln5 = new ListNode(6);
+		ListNode ln6 = new ListNode(4);
 		// 516
 		// 391+516=907
 		// 7->0->9
@@ -65,9 +87,11 @@ public class LinkNumSum {
 		ln6.next = null;
 
 		ListNode node = addTwoNumbers(ln1, ln4);
+		// addTwoList(ln1,ln4);
+		// addTwoNumbers(ln1, ln4);
 
 		while (node != null) {
-			System.out.println(node.val);
+			System.out.print(node.val);
 			node = node.next;
 		}
 

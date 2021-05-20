@@ -3,9 +3,9 @@ package com.chiwei.craft.code.factory.abstraction;
 import com.chiwei.craft.code.factory.Car;
 
 public class BenzCar extends Car {
-	
+
 	AccessoryFactory af;
-	
+
 	public BenzCar(AccessoryFactory af) {
 		super();
 		this.af = af;

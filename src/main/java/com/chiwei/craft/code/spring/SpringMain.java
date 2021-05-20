@@ -10,8 +10,9 @@ public class SpringMain {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		AnnotationConfigApplicationContext acac = new AnnotationConfigApplicationContext(ApplicationConfig.class);
-		//AnnotationConfigApplicationContext acac = new AnnotationConfigApplicationContext();
-		//acac.refresh();
+		// AnnotationConfigApplicationContext acac = new
+		// AnnotationConfigApplicationContext();
+		// acac.refresh();
 		System.out.println(acac.getBean(ClassB.class));
 		log.info("...");
 	}
