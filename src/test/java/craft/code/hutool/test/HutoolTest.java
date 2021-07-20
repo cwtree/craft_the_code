@@ -8,15 +8,11 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Test;
-
+import org.junit.jupiter.api.Test;
 
 import cn.hutool.core.codec.Base64;
-import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.date.ChineseDate;
 import cn.hutool.core.date.DateUnit;
@@ -26,7 +22,6 @@ import cn.hutool.core.lang.Console;
 import cn.hutool.core.lang.Snowflake;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.net.NetUtil;
-import cn.hutool.core.text.StrSpliter;
 import cn.hutool.core.thread.ConcurrencyTester;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.CharsetUtil;
@@ -45,7 +40,8 @@ import cn.hutool.crypto.digest.DigestUtil;
 import cn.hutool.crypto.digest.MD5;
 import cn.hutool.crypto.symmetric.AES;
 import cn.hutool.dfa.WordTree;
-import cn.hutool.setting.SettingUtil;
+import cn.hutool.jwt.JWT;
+import cn.hutool.jwt.JWTHeader;
 
 /**
  * 
@@ -54,6 +50,37 @@ import cn.hutool.setting.SettingUtil;
  * @date 2021-2-12
  */
 public class HutoolTest {
+	
+	@Test
+	public void testJwt() {
+		// 密钥
+		byte[] key = "1234567890".getBytes();
+		String token = JWT.create()
+		    .setPayload("sub", "1234567890")
+		    .setPayload("name", "looly")
+		    .setPayload("admin", true)
+		    .setKey(key)
+		    .sign();
+		System.out.println("----"+token);
+		String jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Imxvb2x5IiwiYWRtaW4iOnRydWV9.Tvz26gnquEz-1fh4bDOA6zVx_eF53hdDz_mQvp6kJbs";
+		JWT jwt = JWT.of(jwtToken);
+
+		// JWT
+		String headerType = (String) jwt.getHeader(JWTHeader.TYPE);
+		System.out.println("headerType = "+headerType);
+		// HS256
+		String headerAlgo = (String) jwt.getHeader(JWTHeader.ALGORITHM);
+		System.out.println("headerAlgo = "+headerAlgo);
+		// 1234567890
+		String plSub = (String) jwt.getPayload("sub");
+		System.out.println("plSub = "+plSub);
+		// looly
+		String plName = (String) jwt.getPayload("name");
+		System.out.println("plName = "+plName);
+		// true
+		boolean plAdmin = (Boolean) jwt.getPayload("admin");
+		System.out.println("plAdmin = "+plAdmin);
+	}
 
 	/**
 	 * 16进制转换 还有unicode转换等见源码
@@ -280,7 +307,7 @@ public class HutoolTest {
 	public void testStr() {
 		String str = "1w2w3w4w5w6w7";
 		// limit 分割成多少个字符串
-		System.out.println(StrSpliter.split(str, "w", 1, true, true));
+		System.out.println(StrUtil.split(str, "w", 1, true, true));
 		String a = null;
 		System.out.println(StrUtil.trim(a) + "----");
 	}
@@ -354,7 +381,8 @@ public class HutoolTest {
 		int process = getProcessPiece();
 		System.out.println(machine+"--"+process);
 		System.out.println((machine&31)+"--"+(process&31));
-		Snowflake sf = IdUtil.createSnowflake(machine&31, process&31);
+		Snowflake sf = IdUtil.getSnowflake();
+				//IdUtil.createSnowflake(machine&31, process&31);
 		Map<Long,String> ids = MapUtil.newConcurrentHashMap();
 		int counter = 10;
 		int threadNum = 2;
