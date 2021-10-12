@@ -37,8 +37,12 @@ import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.asymmetric.KeyType;
 import cn.hutool.crypto.asymmetric.RSA;
 import cn.hutool.crypto.digest.DigestUtil;
+import cn.hutool.crypto.digest.HMac;
+import cn.hutool.crypto.digest.HmacAlgorithm;
 import cn.hutool.crypto.digest.MD5;
 import cn.hutool.crypto.symmetric.AES;
+import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
+import cn.hutool.crypto.symmetric.SymmetricCrypto;
 import cn.hutool.dfa.WordTree;
 import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTHeader;
@@ -50,36 +54,32 @@ import cn.hutool.jwt.JWTHeader;
  * @date 2021-2-12
  */
 public class HutoolTest {
-	
+
 	@Test
 	public void testJwt() {
 		// 密钥
 		byte[] key = "1234567890".getBytes();
-		String token = JWT.create()
-		    .setPayload("sub", "1234567890")
-		    .setPayload("name", "looly")
-		    .setPayload("admin", true)
-		    .setKey(key)
-		    .sign();
-		System.out.println("----"+token);
+		String token = JWT.create().setPayload("sub", "1234567890").setPayload("name", "looly")
+				.setPayload("admin", true).setKey(key).sign();
+		System.out.println("----" + token);
 		String jwtToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Imxvb2x5IiwiYWRtaW4iOnRydWV9.Tvz26gnquEz-1fh4bDOA6zVx_eF53hdDz_mQvp6kJbs";
 		JWT jwt = JWT.of(jwtToken);
 
 		// JWT
 		String headerType = (String) jwt.getHeader(JWTHeader.TYPE);
-		System.out.println("headerType = "+headerType);
+		System.out.println("headerType = " + headerType);
 		// HS256
 		String headerAlgo = (String) jwt.getHeader(JWTHeader.ALGORITHM);
-		System.out.println("headerAlgo = "+headerAlgo);
+		System.out.println("headerAlgo = " + headerAlgo);
 		// 1234567890
 		String plSub = (String) jwt.getPayload("sub");
-		System.out.println("plSub = "+plSub);
+		System.out.println("plSub = " + plSub);
 		// looly
 		String plName = (String) jwt.getPayload("name");
-		System.out.println("plName = "+plName);
+		System.out.println("plName = " + plName);
 		// true
 		boolean plAdmin = (Boolean) jwt.getPayload("admin");
-		System.out.println("plAdmin = "+plAdmin);
+		System.out.println("plAdmin = " + plAdmin);
 	}
 
 	/**
@@ -265,6 +265,26 @@ public class HutoolTest {
 		System.out.println(modulus);
 		System.out.println(exponent);
 
+		HMac mac = new HMac(HmacAlgorithm.HmacSHA256, "password".getBytes());
+
+		// b977f4b13f93f549e06140971bded384
+		String macHex1 = mac.digestHex("123");
+		System.out.println("HAMC - " + macHex1);
+		//3DES加密
+		String content = "test中文";
+
+		byte[] desKey = SecureUtil.generateKey(SymmetricAlgorithm.DESede.getValue()).getEncoded();
+		SymmetricCrypto des = new SymmetricCrypto(SymmetricAlgorithm.DESede, desKey);
+		//加密
+		byte[] desEnc = des.encrypt(content);
+		//解密
+		byte[] desDec = des.decrypt(desEnc);
+		//加密为16进制字符串（Hex表示）
+		String encryptHex = des.encryptHex(content);
+		//解密为字符串
+		String decryptStr = des.decryptStr(encryptHex);
+		System.out.println("3DES解密串："+new String(desDec));
+
 	}
 
 	@Test
@@ -285,6 +305,9 @@ public class HutoolTest {
 		// eth4 (Realtek PCIe GBE Family Controller)
 		System.out.println(NetUtil.getNetworkInterface("eth4"));
 		System.out.println(NetUtil.LOCAL_IP);
+		System.out.println("=============================");
+		System.out.println(NetUtil.getLocalHostName());
+		
 	}
 
 	@Test
@@ -321,7 +344,7 @@ public class HutoolTest {
 	public void testUtil() {
 		System.out.println(RandomUtil.randomInt(10));
 	}
-	
+
 	private static int getMachinePiece() {
 		// 机器码
 		int machinePiece;
@@ -343,7 +366,7 @@ public class HutoolTest {
 		}
 		return machinePiece;
 	}
-	
+
 	private static int getProcessPiece() {
 		// 进程码
 		// 因为静态变量类加载可能相同,所以要获取进程ID + 加载对象的ID值
@@ -352,7 +375,7 @@ public class HutoolTest {
 		int processId;
 		try {
 			// 获取进程ID
-			final String processName =ManagementFactory.getRuntimeMXBean().getName();
+			final String processName = ManagementFactory.getRuntimeMXBean().getName();
 			final int atIndex = processName.indexOf('@');
 			if (atIndex > 0) {
 				processId = Integer.parseInt(processName.substring(0, atIndex));
@@ -379,27 +402,26 @@ public class HutoolTest {
 	public void testId() throws InterruptedException {
 		int machine = getMachinePiece();
 		int process = getProcessPiece();
-		System.out.println(machine+"--"+process);
-		System.out.println((machine&31)+"--"+(process&31));
+		System.out.println(machine + "--" + process);
+		System.out.println((machine & 31) + "--" + (process & 31));
 		Snowflake sf = IdUtil.getSnowflake();
-				//IdUtil.createSnowflake(machine&31, process&31);
-		Map<Long,String> ids = MapUtil.newConcurrentHashMap();
+		// IdUtil.createSnowflake(machine&31, process&31);
+		Map<Long, String> ids = MapUtil.newConcurrentHashMap();
 		int counter = 10;
 		int threadNum = 2;
 		TimeInterval timer = DateUtil.timer();
-		
+
 		ConcurrencyTester tester = ThreadUtil.concurrencyTest(threadNum, () -> {
-		    // 测试的逻辑内容
+			// 测试的逻辑内容
 			for (int i = 0; i < counter; i++) {
 				ids.put(sf.nextId(), "");
-				//String temp = IdUtil.randomUUID();
-				//ids.add(IdUtil.randomUUID());
+				// String temp = IdUtil.randomUUID();
+				// ids.add(IdUtil.randomUUID());
 			}
 		});
 
 		// 获取总的执行时间，单位毫秒
 		Console.log(tester.getInterval());
-
 
 		// 获取总的执行时间，单位毫秒
 		System.out.println(timer.interval() + " ms");
